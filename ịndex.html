@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width=1200px height="500px" style="border: 1px solid;"></canvas>
+</body>
+
+</html>
+<script>
+    class HCN {
+        constructor(x, y, width, height, color) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+            this.color = color;
+        }
+        //Vẽ hình chữ nhật
+        drawHCN() {
+            let canvas = document.getElementById("myCanvas");
+            let ctx = canvas.getContext("2d");
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+        //ham di chuyen
+        moveHCN() {
+            let canvas = document.getElementById("myCanvas");
+            if (this.y < canvas.height - this.height && rotate == true) {
+                this.clearHCN();
+                this.y++;
+                this.drawHCN();
+                if (this.y == canvas.height - this.height) {
+                    rotate = false;
+                }
+            }
+            if (this.y >0 && rotate == false) {
+                this.clearHCN();
+                this.y--;
+                this.drawHCN();
+                if(this.y ==0) {
+                    rotate = true;
+                }
+            }
+        }
+        //xoa hcn
+        clearHCN() {
+            let canvas = document.getElementById("myCanvas");
+            let ctx = canvas.getContext("2d");
+            ctx.clearRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    let hcn = new HCN(0, 0, 50, 30, "#FF0000");
+    hcn.drawHCN();
+    let rotate = true;
+    function b() {
+        hcn.moveHCN();
+    }
+    setInterval(b,5);
+</script>
